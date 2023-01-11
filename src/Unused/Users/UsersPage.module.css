@@ -1,0 +1,25 @@
+.item .Cot {
+    border: 5px solid;
+    border-radius: 5px;
+}
+
+.userPhoto {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+div .blockid {
+    margin: 10px
+}
+
+.selectedPage {
+    font-weight: bold;
+    border: 1px saddlebrown solid;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+
+span {
+    margin: 12px;
+}
