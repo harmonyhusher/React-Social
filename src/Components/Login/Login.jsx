@@ -3,7 +3,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { login } from "../../Redux/AuthReducer.ts";
+=======
+import { login } from "../../Redux/AuthReducer";
+>>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -71,9 +75,15 @@ const Login = () => {
   //   dispatch(login(email, password));
   // }
 
+<<<<<<< HEAD
   useEffect(() => {
     dispatch(login(email, password));
   }, [dispatch, email, password, loginInto])
+=======
+  useEffect((e) => {
+    dispatch(login(email, password));
+  }, [loginInto, dispatch])
+>>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
   // Minimum 8 characters {>>8,20}
   // Maximum 20 characters {8,>>20}
@@ -122,7 +132,11 @@ const Login = () => {
           variant="primary"
           disabled={!formValid}
           type="submit"
+<<<<<<< HEAD
           onClick={() => setLoginInto(true)}
+=======
+          onClick={() => setLoginInto(!loginInto)}
+>>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
         >
           Вход
         </Button>

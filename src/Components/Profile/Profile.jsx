@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import { getUserProfile, getStatusProfile } from "../../Redux/ProfileReducer.ts";
 import { addPost } from "../../Redux/postsSlice.ts";
@@ -11,6 +12,17 @@ function Profile() {
   let [text, setText] = useState("");
 
   let {userId} = useParams();
+=======
+import { useParams, useNavigate } from "react-router-dom";
+import { getUserProfile, savePhoto } from "../../Redux/ProfileReducer";
+import { addPost } from "../../Redux/postsSlice";
+import Profileinfo from "./Profileinfo";
+
+
+function Profile(props) {
+
+  let { userId } = useParams();
+>>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
   const dispatch = useDispatch();
 
@@ -18,6 +30,7 @@ function Profile() {
 
   const status = useSelector((state) => state.profile.status);
 
+<<<<<<< HEAD
   let ownUserId = useSelector((state) => state.auth.id);
 
   // useEffect(() => {
@@ -37,6 +50,27 @@ function Profile() {
   }, [dispatch, ownUserId, userId])
 
   console.log(status)
+=======
+  const ownUserId = useSelector((state) => state.auth.id);
+
+  const [text, setText] = useState("");
+
+  console.log(ownUserId, "ИЗ ПРФОИЛЯ");
+
+  useEffect(
+    (userId) => {
+      if (!userId) {
+        userId = ownUserId;
+      }
+      dispatch(getUserProfile(userId));
+    },
+    [dispatch, userId, ownUserId]
+  );
+
+  // useEffect(() => {
+  //   dispatch(getStatusProfile(userId))
+  // }, [dispatch, profileGet, userId]);
+>>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
   const handleAction = () => {
     if (text.trim().length) {
