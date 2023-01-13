@@ -3,11 +3,7 @@ import userPhoto from "../../assests/images/1233.jpg";
 import Main from "./Main";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
 import { savePhoto } from "../../Redux/ProfileReducer.ts";
-=======
-import { savePhoto } from "../../Redux/ProfileReducer";
->>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
 const Profileinfo = (props) => {
   const [isFormVisible, setFormVisible] = useState(false)
@@ -29,10 +25,6 @@ const Profileinfo = (props) => {
 
   const space = "Неизвестно";
 
-<<<<<<< HEAD
-=======
-  console.log(props.profile);
->>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
   return (
     <>

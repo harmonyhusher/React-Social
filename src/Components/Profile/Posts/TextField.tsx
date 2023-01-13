@@ -1,16 +1,22 @@
 import React from "react";
 import { Button, FormControl } from "react-bootstrap";
 
-const TextField = ({ value, updateText, handleAction }) => {
+interface TextFieldProps {
+  value:string,
+  updateText: (str: string) => void,
+  handleAction: () => void
+}
+
+const TextField: React.FC<TextFieldProps> = ({ value, updateText, handleAction }) => {
   
   return (
     <label>
     <FormControl
-      placeholer='Что нового?'
+      placeholder='Что нового?'
       value={value}
       onChange={(e) => updateText(e.target.value)}
     />
-    <div class='mt-2'>
+    <div className='mt-2'>
     <Button onClick={handleAction}>Добавить</Button>
     </div>
   </label>

@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import PostItem from "./PostItem";
 import {ListGroup} from "react-bootstrap"
+import { useAppSelector } from "../../../Redux/HooksTypes";
 
 const PostList = () => {
 
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useAppSelector((state) => state.posts.list);
 
   console.log(posts)
 

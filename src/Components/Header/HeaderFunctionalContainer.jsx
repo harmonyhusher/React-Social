@@ -2,15 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
 import { Badge } from "react-bootstrap";
 import { useNavigate  } from "react-router-dom";
 import { getAuthUserData } from "../../Redux/AuthReducer.ts";
-=======
-import { getAuthUserData } from "../../Redux/AuthReducer";
-import { Badge } from "react-bootstrap";
-import { useNavigate  } from "react-router-dom";
->>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
 const HeaderFunctional = (props) => {
 
@@ -21,7 +15,6 @@ const HeaderFunctional = (props) => {
 
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
   // useEffect(() => {
   //    dispatch(getAuthUserData());
   // }, [dispatch]);
@@ -29,11 +22,6 @@ const HeaderFunctional = (props) => {
 
  dispatch(getAuthUserData());
 
-=======
-  useEffect(() => {
-    dispatch(getAuthUserData());
-  }, [dispatch]);
->>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
 
   // useEffect(() => {
   //   dispatch(logout())
@@ -41,11 +29,7 @@ const HeaderFunctional = (props) => {
 
   useEffect(() => {
     if (isAuth === false) {
-<<<<<<< HEAD
       navigate("/login");
-=======
-      return navigate("/login");
->>>>>>> 79392af7a2382da7abf7a4c2fdb0777072e0bfc8
     } 
   }, [isAuth, navigate]);
 
