@@ -1,31 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../../Redux/ProfileReducer.ts";
-import { addPost } from "../../Redux/postsSlice.ts";
+import { getUserProfile } from "../../Redux/ProfileReducer";
+import { addPost } from "../../Redux/postsSlice";
 import Profileinfo from "./Profileinfo";
+import { useAppDispatch, useAppSelector } from "../../Redux/HooksTypes";
 
-function Profile() {
+const Profile: React.FC = () => {
   
   let [text, setText] = useState("");
 
   let {userId} = useParams();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const profile = useSelector((state) => state.profile.profile);
+  const profile = useAppSelector((state) => state.profile.profile);
 
-  const status = useSelector((state) => state.profile.status);
+  const status = useAppSelector((state) => state.profile.status);
 
-  let ownUserId = useSelector((state) => state.auth.id);
-
-  // useEffect(() => {
-  //     if (!userId) 
-  //       userId = ownUserId;
-  //     } 
-  //   [dispatch, ownUserId, userId]
-  // );
+  let ownUserId: any = useAppSelector((state) => state.auth.id);
 
   useEffect(() => {
     if (!userId) {

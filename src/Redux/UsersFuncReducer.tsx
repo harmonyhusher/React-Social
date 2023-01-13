@@ -1,5 +1,8 @@
 import { PhotosType } from './ProfileReducer';
 import { usersAPI } from "../api/api";
+import { RootState } from './reduxStore';
+import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 type UserType = {
   id: number;
@@ -17,11 +20,11 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-var SET_USERS = "SET-USERS";
-var SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-var SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const SET_USERS = "SET-USERS";
+const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 
-export default function usersReducer2(state = initialState, action: any): InitialStateType {
+export default function usersReducer2(state = initialState, action: UsersActionsTypes): InitialStateType {
   switch (action.type) {
     case SET_USERS: {
       return { ...state, users: action.users };
@@ -37,6 +40,8 @@ export default function usersReducer2(state = initialState, action: any): Initia
   }
 }
 
+type UsersActionsTypes = setTotalUsersCountActionType | setUsersActionType | setCurrentPageActionType
+
 type setUsersActionType = {
   type: typeof SET_USERS,
   users: Array<UserType>
@@ -44,10 +49,10 @@ type setUsersActionType = {
 
 type setCurrentPageActionType = {
   type: typeof SET_CURRENT_PAGE,
-  currentPage: number
+  currentPage: number,
 }
 
-type setsetTotalUsersCountActionType = {
+type setTotalUsersCountActionType = {
   type: typeof SET_TOTAL_USERS_COUNT,
   totalUsersCount: number
 }
@@ -59,22 +64,26 @@ export const setUsers = (users: Array<UserType>): setUsersActionType => {
       users,
     };
   };
-  export const setCurrentPage = (currentPage: number): setCurrentPageActionType => {
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType => {
     return {
       type: SET_CURRENT_PAGE,
       currentPage,
     };
   };
-  export const setTotalUsersCount = (totalUsersCount: number): setsetTotalUsersCountActionType => {
+export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCountActionType => {
     return {
       type: SET_TOTAL_USERS_COUNT,
       totalUsersCount,
     };
   };
 
-export const getUserPagination = (currentPage: number, pageSize: number) => async (dispatch : any) => {
- let response = await usersAPI.getUsers(currentPage, pageSize);
-      dispatch(setUsers(response.items));
-      dispatch(setTotalUsersCount(response.totalCount));
-    };
-  
+export type getStateType = () => RootState
+export type DispatchType = Dispatch<UsersActionsTypes>
+
+export const getUserPagination = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, RootState, unknown, UsersActionsTypes> => {
+  return async (dispatch: DispatchType, getState: getStateType) => {
+  let response = await usersAPI.getUsers(currentPage, pageSize);
+  dispatch(setUsers(response.items));
+  dispatch(setTotalUsersCount(response.totalCount));
+};
+}

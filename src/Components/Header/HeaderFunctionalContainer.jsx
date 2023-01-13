@@ -2,9 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Badge } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import { useNavigate  } from "react-router-dom";
 import { getAuthUserData } from "../../Redux/AuthReducer.ts";
+import { logout } from "../../Redux/AuthReducer";
 
 const HeaderFunctional = (props) => {
 
@@ -40,8 +41,8 @@ const HeaderFunctional = (props) => {
       <div >
         {isAuth ? (
           <div>
-          <Badge bg="secondary">Loggined as {login}</Badge>
-          {/* <Button bg="secondary" type="submit" onClick={() => setLogouted(!logouted)}>Выйти</Button> */}
+          <Badge bg="primary">Loggined as {login}</Badge>
+          <Button className="btn btn-secondary btn-sm" type="submit" onClick={() => dispatch(logout())}>Выйти</Button>
           </div>
         ) : (
           <NavLink className="text-decoration none" to={"/login"}>Login</NavLink>

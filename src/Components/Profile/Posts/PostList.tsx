@@ -3,7 +3,7 @@ import PostItem from "./PostItem";
 import {ListGroup} from "react-bootstrap"
 import { useAppSelector } from "../../../Redux/HooksTypes";
 
-const PostList = () => {
+const PostList: React.FC = () => {
 
   const posts = useAppSelector((state) => state.posts.list);
 

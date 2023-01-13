@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserPagination } from "../../Redux/UsersFuncReducer.ts";
-import { setCurrentPage } from "../../Redux/UsersFuncReducer.ts";
+import { getUserPagination } from "../../Redux/UsersFuncReducer.tsx";
+import { setCurrentPage } from "../../Redux/UsersFuncReducer.tsx";
 import { NavLink } from "react-router-dom";
 import { createPages } from "./PagesCreator";
 import userPhoto from "../../assests/images/1233.jpg";
 import {Card} from "react-bootstrap"
-import Paginator from "./Paginator/Paginator"
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,6 @@ const Users = () => {
 
   return (
     <>
-    <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={setCurrentPage}/>
         {pages.map((p) => {
           return (
             <>     

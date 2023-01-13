@@ -8,31 +8,34 @@ const instance = axios.create({
 
 
 export const usersAPI = {
-  getUsers(currentPage, pageSize) {
-    return instance
-      .get(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => response.data);
+  async getUsers(currentPage: number, pageSize: number) {
+    const response = await instance
+      .get(`users?page=${currentPage}&count=${pageSize}`);
+    return response.data;
   },
 };
 
 export const profileAPI = {
-  getProfile(userId) {
-    return instance.get(`/profile/${userId}`)
-    .then((response) => response.data)
+  async getProfile(userId: any) {
+    const response = await instance.get(`/profile/${userId}`);
+    return response.data;
   },
-  getStatus(userId) {
-    return instance.get(`/profile/status/${userId}`)
-    .then((response) => response.data)
+  async getStatus(userId: number) {
+    const response = await instance.get(`/profile/status/${userId}`);
+    return response.data;
   },
-  follow(userId) {
+  updateStatus(status: string) {
+    return instance.put(`/profile/status/`, {status: status})
+  },
+  follow(userId: number) {
     return instance.post(`/follow/${userId}`)
     .then(response => {if (response.data.resultCode === 0) {}})
   },
-  unfollow(userId) {
+  unfollow(userId: number) {
     return instance.delete(`/follow/${userId}`)
     .then(response => {if (response.data.resultCode === 1) {}})
   },
-  savePhoto(photoFile) {
+  savePhoto(photoFile: any) {
     const formData = new FormData();
     formData.append('image', photoFile)
     return instance.put(`profile/photo`, formData, {
@@ -43,18 +46,16 @@ export const profileAPI = {
   }
 };
 
-export const jsonAPI = () => { 
-   axios.get(`https://jsonplaceholder.typicode.com/posts`).then((response) => response.data)
- }
-
 export const authAPI = {
   me() {
     return instance.get(`auth/me`);
   },
-  login(email, password) {
+  login(email: string, password: string) {
     return instance.post(`auth/login`, {email, password});
   },
   logout() {
     return instance.delete(`auth/login`);
   },
 };
+
+
