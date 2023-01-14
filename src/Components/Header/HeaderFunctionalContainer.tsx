@@ -1,28 +1,25 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Badge, Button } from "react-bootstrap";
-import { useNavigate  } from "react-router-dom";
-import { getAuthUserData } from "../../Redux/AuthReducer.ts";
+import { useNavigate } from "react-router-dom";
+import { getAuthUserData } from "../../Redux/AuthReducer";
 import { logout } from "../../Redux/AuthReducer";
+import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
 
-const HeaderFunctional = (props) => {
-
+const HeaderFunctional = () => {
   let navigate = useNavigate();
 
-  const isAuth = useSelector((state) => state.auth.isAuth);
-  const login = useSelector((state) => state.auth.login);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const login = useAppSelector((state) => state.auth.login);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // useEffect(() => {
   //    dispatch(getAuthUserData());
   // }, [dispatch]);
 
-
- dispatch(getAuthUserData());
-
+  dispatch(getAuthUserData());
 
   // useEffect(() => {
   //   dispatch(logout())
@@ -31,21 +28,29 @@ const HeaderFunctional = (props) => {
   useEffect(() => {
     if (isAuth === false) {
       navigate("/login");
-    } 
+    }
   }, [isAuth, navigate]);
 
-  console.log(isAuth)
+  console.log(isAuth);
 
   return (
     <>
-      <div >
+      <div>
         {isAuth ? (
           <div>
-          <Badge bg="primary">Loggined as {login}</Badge>
-          <Button className="btn btn-secondary btn-sm" type="submit" onClick={() => dispatch(logout())}>Выйти</Button>
+            <Badge bg="primary">Loggined as {login}</Badge>
+            <Button
+              className="btn btn-secondary btn-sm"
+              type="submit"
+              onClick={() => dispatch(logout())}
+            >
+              Выйти
+            </Button>
           </div>
         ) : (
-          <NavLink className="text-decoration none" to={"/login"}>Login</NavLink>
+          <NavLink className="text-decoration none" to={"/login"}>
+            Login
+          </NavLink>
         )}
       </div>
     </>

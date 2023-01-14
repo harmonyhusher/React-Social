@@ -8,12 +8,12 @@ let initialState = {
   status: "",
 };
 
-type ProfileType = {
+export type ProfileType = {
   userId: any,
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
-  contacts: object;
+  contacts: any;
   github: string,
   vk: string;
   facebook: string;

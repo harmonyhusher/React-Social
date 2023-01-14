@@ -6,10 +6,9 @@ import { NavLink as Link } from "react-router-dom";
 import HeaderFunctionalContainer from "../Header/HeaderFunctionalContainer";
 
 function NavbarMain(props) {
-
   return (
     <>
-      <Navbar  bg="dark" expand="lg" variant="dark">
+      <Navbar bg="dark" expand="lg" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Social Network</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
