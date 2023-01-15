@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import Links from "./Links";
+import Links from "./Links.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarMain from "./Components/Navbar/NavbarCool";
 

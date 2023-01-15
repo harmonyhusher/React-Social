@@ -2,12 +2,7 @@ import profileReducer from "./ProfileReducer";
 import authReducer from "./AuthReducer";
 import usersReducer2 from "./UsersFuncReducer";
 import postsSlice from "./postsSlice";
-import {
-  configureStore,
-  combineReducers,
-  applyMiddleware,
-} from "@reduxjs/toolkit";
-import thunkMiddleware from "redux-thunk";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 let reducers = combineReducers({
   profile: profileReducer,
@@ -16,11 +11,8 @@ let reducers = combineReducers({
   posts: postsSlice,
 });
 
-let store = configureStore(
-  { reducer: reducers },
-  // applyMiddleware(thunkMiddleware)
-);
+let store = configureStore({ reducer: reducers });
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export default store
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export default store;

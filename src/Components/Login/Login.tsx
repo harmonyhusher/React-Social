@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useAppDispatch } from "src/Redux/HooksTypes";
 import { login } from "../../Redux/AuthReducer";
-import { redirect } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -65,11 +65,14 @@ const Login: React.FC = () => {
     }
   };
 
+  let navigate = useNavigate()
 
 
   useEffect(() => {
     dispatch(login(email, password));
-    
+    // if (loginInto === 2) {
+    //   return navigate("/profile")
+    // }
   }, [loginInto]);
 
   // Minimum 8 characters {>>8,20}
