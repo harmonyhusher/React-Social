@@ -1,11 +1,11 @@
-import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { login } from "../../Redux/AuthReducer.ts";
+import { useAppDispatch } from "src/Redux/HooksTypes";
+import { login } from "../../Redux/AuthReducer";
+import { redirect } from "react-router-dom";
 
-const Login = () => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
@@ -17,8 +17,8 @@ const Login = () => {
     "Строка пароля не может быть пустой"
   );
   const [formValid, setFormValid] = useState(false);
-  const [loginInto, setLoginInto] = useState(false)
-  const dispatch = useDispatch();
+  const [loginInto, setLoginInto] = useState(1);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -28,7 +28,7 @@ const Login = () => {
     }
   }, [emailError, passwordError]);
 
-  const blurHandler = (e) => {
+  const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case "email":
         setEmailDirty(true);
@@ -36,12 +36,12 @@ const Login = () => {
       case "password":
         setPasswordDirty(true);
         break;
-        default: 
-        break
+      default:
+        break;
     }
   };
 
-  const emailhandler = (e) => {
+  const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (
       !String(e.target.value)
@@ -56,24 +56,21 @@ const Login = () => {
     }
   };
 
-  const passwordhandler = (e) => {
+  const passwordhandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (e.target.value < 3) {
-      setPasswordError(
-        "Пароль не подходит"
-      );
+    if (Number(e.target.value) < 3) {
+      setPasswordError("Пароль не подходит");
     } else {
       setPasswordError("");
     }
   };
 
-  // function loginHandler(email, password) {
-  //   dispatch(login(email, password));
-  // }
+
 
   useEffect(() => {
     dispatch(login(email, password));
-  }, [dispatch, email, password, loginInto])
+    
+  }, [loginInto]);
 
   // Minimum 8 characters {>>8,20}
   // Maximum 20 characters {8,>>20}
@@ -89,8 +86,8 @@ const Login = () => {
           <Form.Label>Почта</Form.Label>
           <Form.Control
             value={email}
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => emailhandler(e)}
+            onBlur={blurHandler}
+            onChange={emailHandler}
             name={"email"}
             placeholder="Введите почту"
           />
@@ -106,8 +103,8 @@ const Login = () => {
           <Form.Label>Пароль</Form.Label>
           <Form.Control
             value={password}
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => passwordhandler(e)}
+            onBlur={blurHandler}
+            onChange={passwordhandler}
             name={"password"}
             placeholder="Введите пароль"
           />
@@ -122,7 +119,7 @@ const Login = () => {
           variant="primary"
           disabled={!formValid}
           type="submit"
-          onClick={() => setLoginInto(true)}
+          onClick={() => setLoginInto(2)}
         >
           Вход
         </Button>

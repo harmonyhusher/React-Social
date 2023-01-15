@@ -5,8 +5,18 @@ import { getUserProfile } from "../../Redux/ProfileReducer";
 import { addPost } from "../../Redux/postsSlice";
 import Profileinfo from "./Profileinfo";
 import { useAppDispatch, useAppSelector } from "../../Redux/HooksTypes";
+import { ProfileType } from "src/Redux/ProfileReducer";
 
-const Profile: React.FC = () => {
+export type ProfileProps = {
+  profile: ProfileType | null,
+  value: string,
+  updateText: (str: string) => void,
+  handleAction: () => void;
+  ownUserId: any,
+  isOwner: boolean,
+};
+
+const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   
   let [text, setText] = useState("");
 
@@ -42,11 +52,12 @@ const Profile: React.FC = () => {
     <div className="mt-4">
       <Profileinfo
         profile={profile}
-        status={status}
+        // status={status}
         value={text}
         updateText={setText}
         handleAction={handleAction}
         isOwner={!userId}
+        ownUserId={ownUserId}
       />
       {/* {profile ? (
         <Profileinfo

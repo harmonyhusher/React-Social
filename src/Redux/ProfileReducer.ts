@@ -9,13 +9,14 @@ let initialState = {
 };
 
 export type ProfileType = {
-  userId: any,
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
+  userId: any;
+  lookingForAJob?: boolean | null,
+  lookingForAJobDescription?: string;
   fullName: string;
-  contacts: any;
-  github: string,
+  contacts?: any;
+  github: string;
   vk: string;
+  photos: PhotosType;
   facebook: string;
   instagram: string;
   twitter: string;
@@ -111,7 +112,7 @@ export type DispatchType = Dispatch<ProfileActionTypes>;
 export const getUserProfile = (
   userId: any
 ): ThunkAction<Promise<void>, RootState, unknown, ProfileActionTypes> => {
-    return async (dispatch: DispatchType, getState: getStateType) => {
+  return async (dispatch: DispatchType, getState: getStateType) => {
     const response = await profileAPI.getProfile(userId);
     dispatch(setProfile(response));
   };

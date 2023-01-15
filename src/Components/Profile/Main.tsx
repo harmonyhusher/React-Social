@@ -1,17 +1,12 @@
 import React from "react";
 import PostList from "./Posts/PostList";
 import TextField from "./Posts/TextField";
-import { ProfileType } from "src/Redux/ProfileReducer";
+import { ProfileProps } from "./Profile";
 
-type PorfileProps = {
-  profile: ProfileType;
-  value: string;
-  updateText: (str: string) => void;
-  handleAction: () => void;
-};
+const Main: React.FC<ProfileProps> = (props: ProfileProps) => {
 
-const Main: React.FC<PorfileProps> = (props) => {
   const space = "Неизвестно";
+  
   return (
     <div className="col-lg-8">
       <div className="card mb-4">
@@ -35,8 +30,7 @@ const Main: React.FC<PorfileProps> = (props) => {
               <p className="text-muted mb-0">
                 {props.profile ? (
                   <a href="props.profile.contacts.vk">
-                    {" "}
-                    {props.profile.contacts.vk ? "Да" : "Нет"}{" "}
+                    {props.profile.contacts.vk ? "Да" : "Нет"}
                   </a>
                 ) : (
                   space
@@ -51,7 +45,8 @@ const Main: React.FC<PorfileProps> = (props) => {
             </div>
             <div className="col-sm-9">
               <p className="text-muted mb-0">
-                {props.profile.lookingForAJob === false ? "Нет" : "Да"}
+                {/* {props.profile.lookingForAJob === false ? "Нет" : "Да"} */}
+                {props.profile?.lookingForAJob ? "Да" : "Нет"}
               </p>
             </div>
           </div>

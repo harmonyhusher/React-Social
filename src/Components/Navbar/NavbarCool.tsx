@@ -4,8 +4,9 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink as Link } from "react-router-dom";
 import HeaderFunctionalContainer from "../Header/HeaderFunctionalContainer";
+import { ProfileProps } from "../Profile/Profile"
 
-function NavbarMain(props) {
+const NavbarMain: React.FC<ProfileProps> = (props) => {
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark">
