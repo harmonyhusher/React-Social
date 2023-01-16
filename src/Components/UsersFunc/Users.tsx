@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import { getUserPagination } from "../../Redux/UsersFuncReducer";
 import { NavLink } from "react-router-dom";
@@ -6,8 +5,10 @@ import userPhoto from "../../assests/images/1233.jpg";
 import { Card } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
 import Paginator from "./Paginator/Paginator";
+import UsersSearchForm from "./UsersSearchForm";
 
 const Users: React.FC = () => {
+
   const dispatch = useAppDispatch();
 
   const users = useAppSelector((state) => state.usersPage2.users);
@@ -17,36 +18,22 @@ const Users: React.FC = () => {
 
   useEffect(() => {
     if (users.length === 0) {
-      dispatch(getUserPagination(currentPage, pageSize));
+      dispatch(getUserPagination(currentPage, pageSize, ""));
     }
   }, [dispatch, pageSize, totalCount, users.length, currentPage]); //передаем каррент пейдж чтобы вызывать функцию каждый раз когда меняем страницу
 
-  // function searchHandler() {
-  //   dispatch(getUserPagination(currentPage, pageSize));
-  // }
   return (
     <>
+      <UsersSearchForm totalItemsCount={totalCount}
+        currentPage={currentPage}
+        onPageChanged={getUserPagination}
+        pageSize={pageSize} />
       <Paginator
         totalItemsCount={totalCount}
         currentPage={currentPage}
         onPageChanged={getUserPagination}
         pageSize={pageSize}
       />
-      {/* {pages.map((p) => {
-          return (
-            <>     
-              <span 
-              className="m-1"
-                onClick={() => {
-                  dispatch(setCurrentPage(p), searchHandler());
-                }}
-              >
-               <button className="btn btn-dark mt-4">{p}</button>
-              </span>           
-            </>
-          );      
-        })} */}
-
       <div className="users">
         {users.map((u) => {
           return (
