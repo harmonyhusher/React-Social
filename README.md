@@ -8,7 +8,7 @@ Social Network By course of IT-KAMASUTRA: ReactJS Way-Of-Samurai This is a socia
 ### `npm start`
 
 ## `Технологии`
-React, Redux, Redux-Toolkit, Axios, Bootstrap 5
+React, Redux, Redux-Toolkit, Axios, Bootstrap 5, TypeScript
 
 ## `API`
 Spotify API, Socail Network API
