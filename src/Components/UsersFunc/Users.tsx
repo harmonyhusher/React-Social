@@ -18,9 +18,9 @@ const Users: React.FC = () => {
 
   useEffect(() => {
     if (users.length === 0) {
-      dispatch(getUserPagination(currentPage, pageSize, ""));
+      dispatch(getUserPagination(currentPage, pageSize));
     }
-  }, [dispatch, pageSize, totalCount, users.length, currentPage]); //передаем каррент пейдж чтобы вызывать функцию каждый раз когда меняем страницу
+  }, [pageSize, totalCount, users.length, currentPage]); //передаем каррент пейдж чтобы вызывать функцию каждый раз когда меняем страницу
 
   return (
     <>

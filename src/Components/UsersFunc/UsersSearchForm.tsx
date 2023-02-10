@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import { useAppDispatch } from "src/Redux/HooksTypes";
-import { FilterType, getUserPagination } from "src/Redux/UsersFuncReducer";
+import { FilterType, getUserPagination, getUserSearch } from "src/Redux/UsersFuncReducer";
 // import { getFilterTerm } from "src/Redux/UsersFuncReducer";
 
 type UsersSearchFormPropsType = {
@@ -12,10 +12,11 @@ type UsersSearchFormPropsType = {
 };
 
 const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
+
   const onFilterChanged = (filter: FilterType) => {
-    let currentPage = props.currentPage
-    let pageSizee = props.pageSize
-    dispatch(getUserPagination(currentPage, pageSizee, filter.term));
+    let currentPage = props.currentPage;
+    let pageSizee = props.pageSize;
+    dispatch(getUserSearch(currentPage, pageSizee, filter.term));
   };
   let dispatch = useAppDispatch();
   const usersSearchFormValidate = (values: any) => {
@@ -27,8 +28,19 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     onFilterChanged(values);
-    setSubmitting(false)
+    setSubmitting(false);
   };
+
+  const clearSearchForm = (filter: FilterType) => {
+    let currentPage = 1
+    let pageSizee = props.pageSize;
+    dispatch(getUserSearch(currentPage, pageSizee, ""));
+  }
+  // const onFilterReset = (filter: FilterType) => {
+  //   let currentPage = 1;
+  //   let pageSizee = props.pageSize;
+  //   dispatch(getUserPagination(currentPage, pageSizee, ""));
+  // };
 
   return (
     <div>
@@ -39,10 +51,23 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <Field type="text" name="term" />
-            <button type="submit" disabled={isSubmitting}>
-              Find
+            <Field type="text" name="term" className="form-outline"/>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isSubmitting}
+            >
+              Найти
             </button>
+            <button
+              type="submit"
+              className="btn btn-secondary"
+              // disabled={isSubmitting}
+              onClick={() => clearSearchForm}
+            >
+              Очистить
+            </button>
+            {/* <button type="button" className="btn btn-secondary" onClick="onFilterReset">Сброс</button> */}
           </Form>
         )}
       </Formik>

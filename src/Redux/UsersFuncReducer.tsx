@@ -103,9 +103,17 @@ export const setFilterTerm = (term: string): setFilterTermActionType => {
 export type getStateType = () => RootState
 export type DispatchType = Dispatch<UsersActionsTypes>
 
-export const getUserPagination = (currentPage: number, pageSize: number, term: string): ThunkAction<Promise<void>, RootState, unknown, UsersActionsTypes> => {
+export const getUserPagination = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, RootState, unknown, UsersActionsTypes> => {
   return async (dispatch: DispatchType, getState: getStateType) => {
-  let response = await usersAPI.getUsers(currentPage, pageSize, term);
+  let response = await usersAPI.getUsers(currentPage, pageSize);
+  dispatch(setUsers(response.items));
+  dispatch(setTotalUsersCount(response.totalCount));
+};
+}
+
+export const getUserSearch = (currentPage: number, pageSize: number, term: string): ThunkAction<Promise<void>, RootState, unknown, UsersActionsTypes> => {
+  return async (dispatch: DispatchType, getState: getStateType) => {
+  let response = await usersAPI.getUsersSearch(currentPage, pageSize, term);
   dispatch(setUsers(response.items));
   dispatch(setTotalUsersCount(response.totalCount));
 };

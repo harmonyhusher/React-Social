@@ -109,14 +109,12 @@ const Login: React.FC = () => {
             onBlur={blurHandler}
             onChange={passwordhandler}
             name={"password"}
+            type="password"
             placeholder="Введите пароль"
           />
           {passwordDirty && passwordError && (
             <div style={{ color: "red" }}>{passwordError}</div>
           )}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
         <Button
           variant="primary"

@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { Badge, Button } from "react-bootstrap";
@@ -6,24 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { getAuthUserData } from "../../Redux/AuthReducer";
 import { logout } from "../../Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
+import userPhoto from "../../assests/images/1233.jpg";
 
 const HeaderFunctional = () => {
   let navigate = useNavigate();
 
   const isAuth = useAppSelector((state) => state.auth.isAuth);
   const login = useAppSelector((state) => state.auth.login);
+  const profile = useAppSelector((state) => state.profile.profile);
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //    dispatch(getAuthUserData());
-  // }, [dispatch]);
-
   dispatch(getAuthUserData());
-
-  // useEffect(() => {
-  //   dispatch(logout())
-  // }, [logouted, dispatch])
 
   useEffect(() => {
     if (isAuth === false) {
@@ -38,7 +31,6 @@ const HeaderFunctional = () => {
       <div>
         {isAuth ? (
           <div>
-            <Badge bg="primary">Loggined as {login}</Badge>
             <Button
               className="btn btn-secondary btn-sm"
               type="submit"
@@ -59,11 +51,3 @@ const HeaderFunctional = () => {
 
 export default HeaderFunctional;
 
-// const mapStateToProps = (state) => ({
-//   isAuth: state.auth.isAuth,
-//   login: state.auth.login,
-// });
-
-// export default connect(mapStateToProps, { setAuthUserData, getAuthUserData })(
-//   HeaderFunctional
-// );
