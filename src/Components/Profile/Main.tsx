@@ -13,7 +13,7 @@ const Main: React.FC<ProfileProps> = (props: ProfileProps) => {
         <div className="card-body">
           <div className="row">
             <div className="col-sm-3">
-              <p className="mb-0">Full Name</p>
+              <p className="mb-0">Никнейм</p>
             </div>
             <div className="col-sm-9">
               <p className="text-muted mb-0">
@@ -45,7 +45,6 @@ const Main: React.FC<ProfileProps> = (props: ProfileProps) => {
             </div>
             <div className="col-sm-9">
               <p className="text-muted mb-0">
-                {/* {props.profile.lookingForAJob === false ? "Нет" : "Да"} */}
                 {props.profile?.lookingForAJob ? "Да" : "Нет"}
               </p>
             </div>

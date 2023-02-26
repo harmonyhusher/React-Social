@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink as Link } from "react-router-dom";
 import HeaderFunctionalContainer from "../Header/HeaderFunctionalContainer";
-import { ProfileProps } from "../Profile/Profile"
+import { ProfileProps } from "../Profile/Profile";
 
 const NavbarMain: React.FC<ProfileProps> = (props) => {
   return (
@@ -37,6 +37,6 @@ const NavbarMain: React.FC<ProfileProps> = (props) => {
       </Navbar>
     </>
   );
-}
+};
 
 export default NavbarMain;

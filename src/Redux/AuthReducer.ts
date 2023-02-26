@@ -64,11 +64,6 @@ export const login =
     let response = await authAPI.login(email, password);
     if (response.data.resultCode === ResultCodesEnum.Success) {
       dispatch(getAuthUserData());
-
-      // } else {
-      //   if (response.data.resultCode === 10) {
-      //     dispatch(getCaptchaUrl())
-      //   }
     }
   };
 

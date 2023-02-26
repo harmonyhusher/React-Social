@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { useAppDispatch } from "src/Redux/HooksTypes";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
 import { login } from "../../Redux/AuthReducer";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
@@ -18,7 +19,6 @@ const Login: React.FC = () => {
   );
   const [formValid, setFormValid] = useState(false);
   const [loginInto, setLoginInto] = useState(1);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -65,26 +65,18 @@ const Login: React.FC = () => {
     }
   };
 
-  let navigate = useNavigate()
+  // useEffect(() => {
+  //   dispatch(login(email, password));
+  // }, [loginInto]);
 
-
-  useEffect(() => {
-    dispatch(login(email, password));
-    // if (loginInto === 2) {
-    //   return navigate("/profile")
-    // }
-  }, [loginInto]);
-
-  // Minimum 8 characters {>>8,20}
-  // Maximum 20 characters {8,>>20}
-  // At least one uppercase character (?=.*[A-Z])
-  // At least one lowercase character (?=.*[a-z])
-  // At least one digit (?=.*\d)
-  // At least one special character (?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]
+  const loginhandler = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(login(email, password));
+  }
 
   return (
     <div className="w-30 position-absolute top-50 start-50 translate-middle">
-      <Form>
+      <Form onSubmit={loginhandler}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Почта</Form.Label>
           <Form.Control
@@ -120,7 +112,6 @@ const Login: React.FC = () => {
           variant="primary"
           disabled={!formValid}
           type="submit"
-          onClick={() => setLoginInto(2)}
         >
           Вход
         </Button>

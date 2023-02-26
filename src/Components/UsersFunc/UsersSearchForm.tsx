@@ -1,7 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import { useAppDispatch } from "src/Redux/HooksTypes";
-import { FilterType, getUserPagination, getUserSearch } from "src/Redux/UsersFuncReducer";
-// import { getFilterTerm } from "src/Redux/UsersFuncReducer";
+import { FilterType, getUserSearch } from "src/Redux/UsersFuncReducer";
 
 type UsersSearchFormPropsType = {
   totalItemsCount: number;
@@ -13,16 +12,19 @@ type UsersSearchFormPropsType = {
 
 const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
 
+  const dispatch = useAppDispatch();
+
   const onFilterChanged = (filter: FilterType) => {
     let currentPage = props.currentPage;
     let pageSizee = props.pageSize;
     dispatch(getUserSearch(currentPage, pageSizee, filter.term));
   };
-  let dispatch = useAppDispatch();
+  
   const usersSearchFormValidate = (values: any) => {
     const errors = {};
     return errors;
   };
+
   const submit = (
     values: FilterType,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
@@ -36,11 +38,6 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
     let pageSizee = props.pageSize;
     dispatch(getUserSearch(currentPage, pageSizee, ""));
   }
-  // const onFilterReset = (filter: FilterType) => {
-  //   let currentPage = 1;
-  //   let pageSizee = props.pageSize;
-  //   dispatch(getUserPagination(currentPage, pageSizee, ""));
-  // };
 
   return (
     <div>
@@ -60,10 +57,9 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
               Найти
             </button>
             <button
-              type="submit"
+              type="button"  //button type="button", а не type="submit", чтобы не вызывать повторное отправление формы.
               className="btn btn-secondary"
-              // disabled={isSubmitting}
-              onClick={() => clearSearchForm}
+              onClick={() => clearSearchForm({ term: "" })}
             >
               Очистить
             </button>

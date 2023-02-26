@@ -3,7 +3,6 @@ import { usersAPI } from "../api/api";
 import { RootState } from './reduxStore';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { AsyncThunk } from '@reduxjs/toolkit';
 
 type UserType = {
   id: number;
@@ -42,8 +41,6 @@ export default function usersReducer2(state = initialState, action: UsersActions
     case SET_TOTAL_USERS_COUNT: {
       return { ...state, totalCount: action.totalUsersCount };
     }
-    // case SET_FILTER: {
-    //   return {...state, filter: action.term}}
     case SET_FILTER: {
       return {...state, filter: action.payload}
     }

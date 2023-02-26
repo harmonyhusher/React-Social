@@ -23,6 +23,7 @@ export type ProfileType = {
   website: string;
   youtube: string;
   mainLink: string;
+  status: string
 };
 
 export type PhotosType = {
@@ -35,8 +36,6 @@ export type InitialStateType = typeof initialState;
 const SET_PROFILE_DATA = "SET_PROFILE_DATA";
 const SET_STATUS_DATA = "SET_STATUS_DATA";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
-// const SET_FOLLOWED = "SET_FOLLOWED"
-// const SET_UNFOLLOWED = "SET_UNFOLLOWED"
 
 const profileReducer = (
   state = initialState,
@@ -48,11 +47,6 @@ const profileReducer = (
         ...state,
         profile: action.profile,
       };
-    // case SET_STATUS_DATA:
-    //   return {
-    //     ...state,
-    //     profile: action.status,
-    //   };
     case SAVE_PHOTO_SUCCESS:
       return {
         ...state,
@@ -119,7 +113,7 @@ export const getUserProfile = (
 };
 
 export const getStatusProfile =
-  (userId: number) =>
+  (userId: any) =>
   async (dispatch: DispatchType, getState: getStateType) => {
     let response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response));

@@ -6,6 +6,7 @@ import { Card } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
 import Paginator from "./Paginator/Paginator";
 import UsersSearchForm from "./UsersSearchForm";
+import React from "react";
 
 const Users: React.FC = () => {
 
@@ -26,7 +27,7 @@ const Users: React.FC = () => {
     <>
       <UsersSearchForm totalItemsCount={totalCount}
         currentPage={currentPage}
-        onPageChanged={getUserPagination}
+        onPageChanged={() => dispatch(getUserPagination)}
         pageSize={pageSize} />
       <Paginator
         totalItemsCount={totalCount}
@@ -56,4 +57,4 @@ const Users: React.FC = () => {
   );
 };
 
-export default Users;
+export default React.memo(Users);

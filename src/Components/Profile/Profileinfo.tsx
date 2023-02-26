@@ -8,6 +8,7 @@ import { ProfileProps } from "./Profile";
 const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
   const [isFormVisible, setFormVisible] = useState(false);
   let dispatch = useAppDispatch();
+  console.log(props.status)
 
   const formHiderHandler = (e: any) => {
     setFormVisible(true);
@@ -61,13 +62,12 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
               <div className="card-body p-0">
                 <ul className="list-group list-group-flush rounded-3">
                   <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <p className="mb-0">Какая-то инофрмация</p>
+                    <p className="mb-0">Статус</p>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center p-3">
                     <div className="col-sm-3">
                       <p className="text-muted mb-0">
-                        Status:
-                        {/* <div>{props.profile ? props.status : space}</div> */}
+                        <div>{props.profile ? props.status : space}</div>
                       </p>
                     </div>
                   </li>
@@ -85,6 +85,7 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
               {...formHiderFalseHandler}
               ownUserId={props.ownUserId}
               isOwner={props.isOwner}
+              status={props.status}
             />
           )}
           {!isFormVisible && (
@@ -94,21 +95,6 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
               </button>
             </div>
           )}
-          {/* <Main
-            profile={props.profile}
-            value={props.value}
-            handleAction={props.handleAction}
-            updateText={props.updateText}
-            ownUserId={props.ownUserId}
-            isOwner={false}
-            // onCancel={formHiderHandler()}
-          /> */}
-
-          {/* <Main
-          value={props.value}
-          handleAction={props.handleAction}
-          updateText={props.updateText}
-        /> */}
         </div>
       </div>
     </>

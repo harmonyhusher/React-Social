@@ -6,21 +6,22 @@ import { addPost } from "../../Redux/postsSlice";
 import Profileinfo from "./Profileinfo";
 import { useAppDispatch, useAppSelector } from "../../Redux/HooksTypes";
 import { ProfileType } from "src/Redux/ProfileReducer";
+import { getStatusProfile } from "../../Redux/ProfileReducer";
 
 export type ProfileProps = {
-  profile: ProfileType | null,
-  value: string,
-  updateText: (str: string) => void,
+  profile: ProfileType | null;
+  value: string;
+  updateText: (str: string) => void;
   handleAction: () => void;
-  ownUserId: any,
-  isOwner: boolean,
+  ownUserId: any;
+  isOwner: boolean;
+  status: string;
 };
 
 const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
-  
   let [text, setText] = useState("");
 
-  let {userId} = useParams();
+  let { userId } = useParams();
 
   const dispatch = useAppDispatch();
 
@@ -32,18 +33,18 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
 
   useEffect(() => {
     if (!userId) {
-      userId = ownUserId
+      userId = ownUserId;
       dispatch(getUserProfile(userId));
+      dispatch(getStatusProfile(userId));
     }
-     dispatch(getUserProfile(userId))
-    //  dispatch(getStatusProfile(userId))
-  }, [dispatch, ownUserId, userId])
+    dispatch(getUserProfile(userId));
+  }, []);
 
-  console.log(status)
+  console.log(status);
 
   const handleAction = () => {
     if (text.trim().length) {
-      dispatch(addPost( text ));
+      dispatch(addPost(text));
       setText("");
     }
   };
@@ -52,24 +53,13 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
     <div className="mt-4">
       <Profileinfo
         profile={profile}
-        // status={status}
+        status={status}
         value={text}
         updateText={setText}
         handleAction={handleAction}
         isOwner={!userId}
         ownUserId={ownUserId}
       />
-      {/* {profile ? (
-        <Profileinfo
-          profile={profile}
-          // status={status}
-          value={text}
-          updateText={setText}
-          handleAction={handleAction}
-        />
-      ) : (
-        "Profile Page"
-      )} */}
     </div>
   );
 };
