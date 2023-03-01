@@ -65,10 +65,6 @@ const Login: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(login(email, password));
-  // }, [loginInto]);
-
   const loginhandler = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(login(email, password));
