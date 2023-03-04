@@ -38,9 +38,16 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
       dispatch(getStatusProfile(userId));
     }
     dispatch(getUserProfile(userId));
-  }, []);
+    dispatch(getStatusProfile(userId));
+  }, [userId]); 
 
-  console.log(status);
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     dispatch(getStatusProfile(userId));
+  //   }
+  // }, [userId]); 
+  console.log(status + " это статус");
 
   const handleAction = () => {
     if (text.trim().length) {

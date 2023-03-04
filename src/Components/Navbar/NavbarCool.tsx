@@ -7,15 +7,16 @@ import HeaderFunctionalContainer from "../Header/HeaderFunctionalContainer";
 import { ProfileProps } from "../Profile/Profile";
 
 const NavbarMain: React.FC<ProfileProps> = (props) => {
+
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Social Network</Navbar.Brand>
+          <Navbar.Brand>Social Network</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="profile">
+              <Nav.Link as={Link} to={`/profile`}>
                 Profile
               </Nav.Link>
               <Nav.Link as={Link} to="users2">
@@ -28,9 +29,7 @@ const NavbarMain: React.FC<ProfileProps> = (props) => {
                 <NavDropdown.Divider />
                 <NavDropdown.Item to="">Something</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to={`/profile/${props.ownUserId}`}>
-                <HeaderFunctionalContainer />
-              </Nav.Link>
+              <HeaderFunctionalContainer />
             </Nav>
           </Navbar.Collapse>
         </Container>

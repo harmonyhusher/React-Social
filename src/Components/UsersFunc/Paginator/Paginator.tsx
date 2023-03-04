@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Pagination } from "react-bootstrap";
 import { useAppDispatch } from "src/Redux/HooksTypes";
+import debounce from "lodash.debounce";
 
 type PaginatorPropsType = {
   totalItemsCount: number
@@ -28,6 +29,15 @@ const Paginator: React.FC<PaginatorPropsType> = ({totalItemsCount, pageSize,
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPortionPageNumber = portionNumber * portionSize;
 
+  const debouncedPageChanged = debounce((pageNumber: number) => {
+    dispatch(onPageChanged(pageNumber));
+  }, 500);
+
+  const handlePageChanged = (pageNumber: number) => {
+    debouncedPageChanged.cancel();
+    debouncedPageChanged(pageNumber);
+  };
+
   return (
     <Pagination className="m-1">
       {portionNumber > 1 && (
@@ -46,7 +56,7 @@ const Paginator: React.FC<PaginatorPropsType> = ({totalItemsCount, pageSize,
             <span
               key={p}
               onClick={() => {
-                dispatch(onPageChanged(p));
+                handlePageChanged(p);
               }}
             >
               <Pagination.Item>{p}</Pagination.Item>

@@ -6,8 +6,11 @@ import { useAppDispatch } from "src/Redux/HooksTypes";
 import { ProfileProps } from "./Profile";
 
 const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
+  
   const [isFormVisible, setFormVisible] = useState(false);
+
   let dispatch = useAppDispatch();
+
   console.log(props.status)
 
   const formHiderHandler = (e: any) => {
@@ -67,7 +70,7 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
                   <li className="list-group-item d-flex justify-content-between align-items-center p-3">
                     <div className="col-sm-3">
                       <p className="text-muted mb-0">
-                        <div>{props.profile ? props.status : space}</div>
+                        <div>{props.profile ? props.status : "Пустой статус"}</div>
                       </p>
                     </div>
                   </li>

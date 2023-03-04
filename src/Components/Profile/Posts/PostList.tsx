@@ -7,8 +7,6 @@ const PostList: React.FC = () => {
 
   const posts = useAppSelector((state) => state.posts.list);
 
-  console.log(posts)
-
   return (
     <ListGroup>
     {posts.map(post => (

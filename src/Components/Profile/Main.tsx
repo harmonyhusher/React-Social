@@ -41,18 +41,18 @@ const Main: React.FC<ProfileProps> = (props: ProfileProps) => {
           <hr />
           <div className="row">
             <div className="col-sm-3">
-              <p className="mb-0">Job</p>
+              <p className="mb-0">Работа</p>
             </div>
             <div className="col-sm-9">
               <p className="text-muted mb-0">
-                {props.profile?.lookingForAJob ? "Да" : "Нет"}
+                {props.profile?.lookingForAJob ? "Активно ищет работу" : "Уже устроился на работу"}
               </p>
             </div>
           </div>
           <hr />
           <div className="row">
             <div className="col-sm-3">
-              <p className="mb-1">Posts:</p>
+              <p className="mb-1">Посты:</p>
             </div>
             <div className="mb-2">
               <TextField

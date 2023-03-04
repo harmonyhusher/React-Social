@@ -52,6 +52,11 @@ const profileReducer = (
         ...state,
         profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
+      case SET_STATUS_DATA: 
+      return {
+        ...state,
+        status: action.status
+      }
     default:
       return state;
   }

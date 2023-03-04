@@ -26,7 +26,7 @@ export const profileAPI = {
     const response = await instance.get(`/profile/${userId}`);
     return response.data;
   },
-  async getStatus(userId: number) {
+  async getStatus(userId: any) {
     const response = await instance.get(`/profile/status/${userId}`);
     return response.data;
   },
