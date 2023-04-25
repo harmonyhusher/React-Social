@@ -3,6 +3,7 @@ import Login from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import Spotify from "./Components/Spotify/Spotify";
 import Users from "./Components/UsersFunc/Users";
+import ChatPage from "./pages/Chat/ChatPage";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "./Redux/HooksTypes";
 import { useEffect } from "react"
@@ -30,6 +31,7 @@ const Links = () => {
       <Route path="/login/" element={<Login />} />
       <Route path="/music/" element={<Spotify />} />
       <Route path="/users2/" element={<Users />} />
+      <Route path="/chat" element={<ChatPage />} />
     </Routes>
   );
 };

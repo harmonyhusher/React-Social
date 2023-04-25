@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../../Redux/ProfileReducer";
+import { getFollowed, getUserProfile } from "../../Redux/ProfileReducer";
 import { addPost } from "../../Redux/postsSlice";
 import Profileinfo from "./Profileinfo";
 import { useAppDispatch, useAppSelector } from "../../Redux/HooksTypes";
@@ -16,6 +16,8 @@ export type ProfileProps = {
   ownUserId: any;
   isOwner: boolean;
   status: string;
+  handleFollow: () => void;
+  isFollowed: boolean | null
 };
 
 const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
@@ -26,6 +28,8 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   const dispatch = useAppDispatch();
 
   const profile = useAppSelector((state) => state.profile.profile);
+
+  const isFollowed = useAppSelector((state) => state.profile.isFollowed);
 
   const status = useAppSelector((state) => state.profile.status);
 
@@ -42,11 +46,6 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   }, [userId]); 
 
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     dispatch(getStatusProfile(userId));
-  //   }
-  // }, [userId]); 
   console.log(status + " это статус");
 
   const handleAction = () => {
@@ -55,6 +54,10 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
       setText("");
     }
   };
+
+  const handleFollow = () => {
+    dispatch(getFollowed(userId))
+  }
 
   return (
     <div className="mt-4">
@@ -66,6 +69,8 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
         handleAction={handleAction}
         isOwner={!userId}
         ownUserId={ownUserId}
+        handleFollow={handleFollow}
+        isFollowed={isFollowed}
       />
     </div>
   );

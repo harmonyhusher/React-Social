@@ -34,16 +34,10 @@ export const profileAPI = {
     return instance.put(`/profile/status/`, { status: status });
   },
   follow(userId: number) {
-    return instance.post(`/follow/${userId}`).then((response) => {
-      if (response.data.resultCode === 0) {
-      }
-    });
+    return instance.post(`/follow/${userId}`).then(res => res.data);
   },
   unfollow(userId: number) {
-    return instance.delete(`/follow/${userId}`).then((response) => {
-      if (response.data.resultCode === 1) {
-      }
-    });
+    return instance.delete(`follow/${userId}`).then(res => res.data)
   },
   savePhoto(photoFile: any) {
     const formData = new FormData();

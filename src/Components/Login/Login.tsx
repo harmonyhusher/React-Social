@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "src/Redux/HooksTypes";
+import { Form, Button } from "react-bootstrap";
+import { useAppDispatch } from "src/Redux/HooksTypes";
 import { login } from "../../Redux/AuthReducer";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +17,6 @@ const Login: React.FC = () => {
     "Строка пароля не может быть пустой"
   );
   const [formValid, setFormValid] = useState(false);
-  const [loginInto, setLoginInto] = useState(1);
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -43,17 +41,6 @@ const Login: React.FC = () => {
 
   const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    if (
-      !String(e.target.value)
-        .toLowerCase()
-        .match(
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
-    ) {
-      setEmailError("Некорректный email");
-    } else {
-      setEmailError("");
-    }
   };
 
   const passwordhandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +53,9 @@ const Login: React.FC = () => {
   };
 
   const loginhandler = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      dispatch(login(email, password));
-  }
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
 
   return (
     <div className="w-30 position-absolute top-50 start-50 translate-middle">
@@ -104,11 +91,7 @@ const Login: React.FC = () => {
             <div style={{ color: "red" }}>{passwordError}</div>
           )}
         </Form.Group>
-        <Button
-          variant="primary"
-          disabled={!formValid}
-          type="submit"
-        >
+        <Button variant="primary" disabled={formValid} type="submit">
           Вход
         </Button>
       </Form>

@@ -1,17 +1,16 @@
 import userPhoto from "../../assests/images/1233.jpg";
 import Main from "./Main";
 import { useState } from "react";
-import {savePhoto } from "../../Redux/ProfileReducer";
+import { savePhoto } from "../../Redux/ProfileReducer";
 import { useAppDispatch } from "src/Redux/HooksTypes";
 import { ProfileProps } from "./Profile";
 
 const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
-  
   const [isFormVisible, setFormVisible] = useState(false);
 
   let dispatch = useAppDispatch();
 
-  console.log(props.status)
+  console.log(props.status);
 
   const formHiderHandler = (e: any) => {
     setFormVisible(true);
@@ -54,9 +53,23 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
                   />
                 )}
                 <div className="d-flex justify-content-center mb-2">
-                  <button type="button" className="btn btn-primary">
-                    Follow
-                  </button>
+                  {props.isFollowed ? (
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={props.handleFollow}
+                    >
+                      Удалить из друзей
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={props.handleFollow}
+                    >
+                      Добавить в друзья
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -70,7 +83,13 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
                   <li className="list-group-item d-flex justify-content-between align-items-center p-3">
                     <div className="col-sm-3">
                       <p className="text-muted mb-0">
-                        <div>{props.profile ? props.status : "Пустой статус"}</div>
+                        <div>
+                          {props.profile
+                            ? props.status
+                              ? props.status
+                              : "Пусто"
+                            : null}
+                        </div>
                       </p>
                     </div>
                   </li>
@@ -82,13 +101,15 @@ const Profileinfo: React.FC<ProfileProps> = (props: ProfileProps) => {
           {isFormVisible && (
             <Main
               profile={props.profile}
-              value={props.value} 
+              value={props.value}
               handleAction={props.handleAction}
               updateText={props.updateText}
               {...formHiderFalseHandler}
               ownUserId={props.ownUserId}
               isOwner={props.isOwner}
               status={props.status}
+              handleFollow={props.handleFollow}
+              isFollowed={props.isFollowed}
             />
           )}
           {!isFormVisible && (

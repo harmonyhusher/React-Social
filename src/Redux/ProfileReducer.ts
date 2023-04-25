@@ -1,11 +1,12 @@
 import { RootState } from "./reduxStore";
 import { ThunkAction } from "redux-thunk";
-import { profileAPI } from "../api/api";
+import { profileAPI, ResultCodesEnum } from "../api/api";
 import { Dispatch } from "redux";
 
 let initialState = {
   profile: null as ProfileType | null,
   status: "",
+  isFollowed: null,
 };
 
 export type ProfileType = {
@@ -23,7 +24,8 @@ export type ProfileType = {
   website: string;
   youtube: string;
   mainLink: string;
-  status: string
+  status: string;
+  isFollowed: boolean;
 };
 
 export type PhotosType = {
@@ -36,6 +38,7 @@ export type InitialStateType = typeof initialState;
 const SET_PROFILE_DATA = "SET_PROFILE_DATA";
 const SET_STATUS_DATA = "SET_STATUS_DATA";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+const SET_FOLLOWED_TRUE = "SET_FOLLOWED_TRUE"
 
 const profileReducer = (
   state = initialState,
@@ -65,7 +68,8 @@ const profileReducer = (
 type ProfileActionTypes =
   | setProfileActionType
   | setStatusActionType
-  | savePhotoSuccessActionType;
+  | savePhotoSuccessActionType 
+  | setFollowedActionType
 
 type setProfileActionType = {
   type: typeof SET_PROFILE_DATA;
@@ -78,6 +82,18 @@ export const setProfile = (profile: ProfileType): setProfileActionType => {
     profile,
   };
 };
+
+export const setFollowed = (isFollowed: boolean): setFollowedActionType => {
+  return {
+    type: SET_FOLLOWED_TRUE,
+    isFollowed,
+  }
+}
+
+type setFollowedActionType = {
+  type: typeof SET_FOLLOWED_TRUE;
+  isFollowed: boolean;
+}
 
 type setStatusActionType = {
   type: typeof SET_STATUS_DATA;
@@ -122,6 +138,15 @@ export const getStatusProfile =
   async (dispatch: DispatchType, getState: getStateType) => {
     let response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response));
+  };
+
+export const getFollowed =
+  (userId: any) =>
+  async (dispatch: DispatchType, getState: getStateType) => {
+    let response = await profileAPI.follow(userId);
+    if (response.resultCode = ResultCodesEnum.Success) {
+      dispatch(setFollowed(true));
+    }
   };
 
 export const savePhoto =

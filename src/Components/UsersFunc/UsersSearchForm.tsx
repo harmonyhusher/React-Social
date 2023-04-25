@@ -63,7 +63,6 @@ const UsersSearchForm: React.FC<UsersSearchFormPropsType> = (props) => {
             >
               Очистить
             </button>
-            {/* <button type="button" className="btn btn-secondary" onClick="onFilterReset">Сброс</button> */}
           </Form>
         )}
       </Formik>

@@ -7,7 +7,6 @@ import HeaderFunctionalContainer from "../Header/HeaderFunctionalContainer";
 import { ProfileProps } from "../Profile/Profile";
 
 const NavbarMain: React.FC<ProfileProps> = (props) => {
-
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark">
@@ -21,6 +20,9 @@ const NavbarMain: React.FC<ProfileProps> = (props) => {
               </Nav.Link>
               <Nav.Link as={Link} to="users2">
                 Users
+              </Nav.Link>
+              <Nav.Link as={Link} to="chat">
+                Chat
               </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/music">
